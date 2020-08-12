@@ -6,6 +6,8 @@ const resolver = {
   },
   Mutation: {
     createCategory: (_: any, args: { name: string }) => CategoryService.createCategory(args),
+    updateCategory: (_: any, args: { id: string; name: string }) => CategoryService.updateCategory(args),
+    deleteCategory: (_: any, args: { id: string }) => CategoryService.deleteCategory(args),
   },
 };
 

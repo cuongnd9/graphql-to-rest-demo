@@ -1,0 +1,24 @@
+query cats($id: String){
+    cats(id: $id){
+        id
+        name
+        color
+        categoryId
+        category{
+            id
+            name
+            cats{
+                id
+                name
+                color
+                categoryId
+                createdAt
+                updatedAt
+            }
+            createdAt
+            updatedAt
+        }
+        createdAt
+        updatedAt
+    }
+}

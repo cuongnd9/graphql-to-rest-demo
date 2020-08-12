@@ -1,0 +1,13 @@
+{
+  "endpoints": {
+    "/categories": {
+      "get": {
+        "operation": "categories"
+      },
+      "post": {
+        "operation": "createCategory",
+        "successStatusCode": 201
+      }
+    }
+  }
+}

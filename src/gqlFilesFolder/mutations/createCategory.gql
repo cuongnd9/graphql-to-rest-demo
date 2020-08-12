@@ -1,0 +1,30 @@
+mutation createCategory($name: String!){
+    createCategory(name: $name){
+        id
+        name
+        cats{
+            id
+            name
+            color
+            categoryId
+            category{
+                id
+                name
+                cats{
+                    id
+                    name
+                    color
+                    categoryId
+                    createdAt
+                    updatedAt
+                }
+                createdAt
+                updatedAt
+            }
+            createdAt
+            updatedAt
+        }
+        createdAt
+        updatedAt
+    }
+}

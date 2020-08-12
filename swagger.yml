@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  title: graphql-express-kit API
+  version: 3.0.0
+paths:
+  /api/cats:
+    get:
+      operationId: catsQuery
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cat'
+  /api/categories:
+    get:
+      operationId: categoriesQuery
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+  /api/create-cat:
+    post:
+      operationId: createCatMutation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                color:
+                  type: string
+                categoryId:
+                  type: string
+              required:
+                - name
+                - categoryId
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cat'
+  /api/create-category:
+    post:
+      operationId: createCategoryMutation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+  /api/update-category:
+    put:
+      operationId: updateCategoryMutation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+              required:
+                - id
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+  /api/delete-category:
+    delete:
+      operationId: deleteCategoryMutation
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+components:
+  schemas:
+    Query:
+      type: object
+      properties:
+        cats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cat'
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    Mutation:
+      type: object
+      properties:
+        createCat:
+          $ref: '#/components/schemas/Cat'
+        createCategory:
+          $ref: '#/components/schemas/Category'
+        updateCategory:
+          $ref: '#/components/schemas/Category'
+        deleteCategory:
+          type: integer
+          format: int32
+    Cat:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        categoryId:
+          type: string
+        category:
+          $ref: '#/components/schemas/Category'
+        createdAt:
+          type: object
+        updatedAt:
+          type: object
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        cats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cat'
+        createdAt:
+          type: object
+        updatedAt:
+          type: object

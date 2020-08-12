@@ -19,6 +19,24 @@ class CategoryService {
       name,
     }, { transaction }));
   }
+
+  static async updateCategory({ id, name }: { id: string; name: string }) {
+    const data = await sequelize.transaction((transaction) => Category.update({
+      name,
+    }, {
+      where: { id },
+      returning: true,
+      transaction,
+    }));
+    return JSON.parse(JSON.stringify(data[1]))[0];
+  }
+
+  static deleteCategory({ id }: { id: string }) {
+    return sequelize.transaction((transaction) => Category.destroy({
+      where: { id },
+      transaction,
+    }));
+  }
 }
 
 export default CategoryService;
